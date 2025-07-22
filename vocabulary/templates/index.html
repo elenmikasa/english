@@ -22,11 +22,9 @@
             $(".post-preview").after("<p>singular aspect</p>");
             $(".post-subtitle").remove();
             $(".post-preview a").attr("target", "_blank");
-            $(".post-subtitle").hide();
-            $(".post-title").click(function(){
-                $(".post-subtitle").text("まれにみる");
-            });*/
-            $(".post-subtitle").hide();
+            
+            
+            
             /*
             $(".post-title").mouseover(function(){
                 $(".post-subtitle").fadeIn(1000);
@@ -34,10 +32,17 @@
                 $(".post-subtitle").fadeOut(3000);
             });*/
 
-            $(".post-title").hover(function(){
-                $(".post-subtitle").fadeIn(1000);
+            /*$(".post-title").hover(function(){
+                $(this).next().fadeIn(1000);
+                 
             }, function(){
-                $(".post-subtitle").fadeOut(3000);
+                $(this).next().fadeOut(3000);
+            });*/
+            $(".post-subtitle").hide();
+            
+            $(".post-title").click(function(){
+                $(this).next().fadeIn(1000);
+                $(this).next().fadeOut(3000);
             });
             
         });
@@ -56,7 +61,7 @@
             {% for vocabulary in vocabulary_list %}
                 <div class="post-preview">
                     <a href="#">
-                        <h2 class="post-title">{{ vocabulary.word }}</h2>
+                        <h2 id="{{ vocabulary.id }}" class="post-title">{{ vocabulary.word }}</h2>
                         <h3 class="post-subtitle">{{ vocabulary.meaning }}</h3>
                     </a>
                     
@@ -66,8 +71,39 @@
                 {% empty %}
                 <p>登録された単語がありません。</p>
             {% endfor %}
+            
+            <!-- ページネーション処理 -->
+            {% if is_paginated %}
+                <ul class="pagination">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
 
+                    {% for page_num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == page_num %}
+                        <li class="page-item active">
+                            <a class="page-link" href="#">{{ page_num }}</a>
+                        </li>
+                        {% else %}
+                        <li class="page-item">
+                            <a class="page-link" href="?page={{ page_num }}">{{ page_num }}</a>
+                        </li>
+                        {% endif %}
+                    {% endfor %}
 
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+            {% endif %}
         </div>
     </div>
 </div>
