@@ -11,3 +11,12 @@ footer {
 .my-div-style {
     margin-top: 6rem;
 }
+
+.my-a-style {
+    text-decoration: underline;
+    text-align: right;
+}
+
+.my-h3-opacity {
+    opacity: 0;
+}

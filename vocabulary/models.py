@@ -17,6 +17,7 @@ class Vocabulary(models.Model):
 
     class Meta:
         verbose_name_plural = 'Vocabulary'
+        ordering = ('id',)
 
     def __str__(self):
         return self.word

@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}単語詳細|English Vocabulary{% endblock %}
+
+{% block contents %}
+<div class="container my-div-style">
+    <div class="row">
+        <div class="col-3">
+            <strong>単語</strong>
+        </div>
+        <div class="col-9">
+            {{ object.word }}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-3">
+            <strong>意味</strong>
+        </div>
+        <div class="col-9">
+            {{ object.meaning|linebreaksbr }}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-3">
+            <strong>読みカタカナ</strong>
+        </div>
+        <div class="col-9">
+            {{ object.yomikatakana }}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-3">
+            <strong>発音</strong>
+        </div>
+        <div class="col-9">
+            {{ object.pronunciation }}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-3">
+            <strong>品詞</strong>
+        </div>
+        <div class="col-9">
+            {{ object.part_of_speech }}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-3">
+            <strong>例文</strong>
+        </div>
+        <div class="col-9">
+            {{ object.sentence_eng }}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-3">
+            <strong>例文訳</strong>
+        </div>
+        <div class="col-9">
+            {{ object.sentence_jpn }}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-3">
+            <strong>カテゴリー</strong>
+        </div>
+        <div class="col-9">
+            {{ object.category }}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-3">
+            <strong>作成日時</strong>
+        </div>
+        <div class="col-9">
+            {{ object.created_at }}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="row">
+        <div class="col-3">
+            <strong>更新日時</strong>
+        </div>
+        <div class="col-9">
+            {{ object.updated_at }}
+        </div>
+    </div>
+    <a class="btn btn-success mt-5 mb-3" href="{% url 'vocabulary:vocabulary_update' object.pk %}">編集</a>
+    <a class="btn btn-danger mt-5 ml-2 mb-3" href="{% url 'vocabulary:vocabulary_delete' object.pk %}">削除</a>
+</div>
+{% endblock %}

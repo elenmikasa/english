@@ -7,9 +7,6 @@
 {% block head %}
     <link href="{% static 'css/clean-blog.css' %}" rel="stylesheet">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <style>
-        .first { color: hotpink; }
-    </style>
     <script>
         $(function() {
             /* $(".post-subtitle").css("color", "hotpink"); 
@@ -22,8 +19,6 @@
             $(".post-preview").after("<p>singular aspect</p>");
             $(".post-subtitle").remove();
             $(".post-preview a").attr("target", "_blank");
-            
-            
             
             /*
             $(".post-title").mouseover(function(){
@@ -38,11 +33,11 @@
             }, function(){
                 $(this).next().fadeOut(3000);
             });*/
-            $(".post-subtitle").hide();
-            
+            /*$(".post-subtitle").hide();*/
+
             $(".post-title").click(function(){
-                $(this).next().fadeIn(1000);
-                $(this).next().fadeOut(3000);
+                $(this).next().css("opacity", 1);
+                $(this).next().fadeTo(3000, 0);
             });
             
         });
@@ -55,16 +50,16 @@
         <div class="col-md-10 col-lg-8 col-xl-7">
             <!-- Pager-->
             <div class="d-flex justify-content-end mb-4">
-                <a class="btn btn-primary float-right" href="#">単語登録</a>
+                <a class="btn btn-primary float-right" href="{% url 'vocabulary:vocabulary_create' %}">単語登録</a>
             </div>
             <!-- Post preview-->
             {% for vocabulary in vocabulary_list %}
                 <div class="post-preview">
                     <a href="#">
-                        <h2 id="{{ vocabulary.id }}" class="post-title">{{ vocabulary.word }}</h2>
-                        <h3 class="post-subtitle">{{ vocabulary.meaning }}</h3>
+                        <h2 class="post-title">{{ vocabulary.word }}</h2>
+                        <h3 class="post-subtitle my-h3-opacity">{{ vocabulary.meaning }}</h3>
                     </a>
-                    
+                    <div class="my-a-style"><a href="{% url 'vocabulary:vocabulary_detail' vocabulary.pk %}">detail</a></div>
                 </div>
                 <!-- Divider-->
                 <hr class="my-4" />
